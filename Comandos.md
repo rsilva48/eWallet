@@ -31,3 +31,8 @@ nvm install 16
 nvm use 16.20.2
 ionic serve
 ```
+## Configuración e instalación de Firebase v9 y AngularFire v7 compatible con Angular v12
+```
+ npm install --save @angular/fire@^7.6.1
+ npm install --save firebase@^9.23.0
+```
