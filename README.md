@@ -3,7 +3,7 @@ Reto Frontend realizado por Roger Silva
 
 ## Dependencias
 
-### Instalar Node.js compatible con la version de Angular 12.2.17
+### Instalar Node.js compatible con la version de Angular 12.2.17 en Windows
 
 Descargar de [este enlace](https://github.com/coreybutler/nvm-windows/releases/) descargar la ultima versión de Node Version Manager para Windows, buscar en el listado del ultimo release el archivo nvm-setup.exe y ejecutar desde CLI los comandos señalados al final de la sección.
 

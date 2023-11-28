@@ -25,6 +25,7 @@ npm install --save-dev @angular-eslint/builder@12.7.0 --force
 npm install --save-dev typescript@4.3.5 --force
 npm install --save zone.js@0.11.4 --force
 npm install --save rxjs@7.0.1 --force
+npm update
 npm aufit fix
 nvm install 16
 nvm use 16.20.2
