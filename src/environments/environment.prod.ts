@@ -1,3 +1,4 @@
+//Este archivo con la información sensitiva normalmente estaria dentro de .gitignore para que no se suba a repositorios públicos
 export const environment = {
   production: true,
   // Configuración de Firebase en ambiente de producción

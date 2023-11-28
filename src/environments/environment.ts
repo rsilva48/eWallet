@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+//Este archivo con la información sensitiva normalmente estaria dentro de .gitignore para que no se suba a repositorios públicos
+
 export const environment = {
   production: false,
   // Configuración de Firebase en ambiente de desarrollo

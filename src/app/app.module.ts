@@ -8,17 +8,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //Importación de modulos de Angular Fire para el uso de Firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { FunctionsModule, getFunctions, provideFunctions } from '@angular/fire/functions';
+
 
 //Importación de environment (constantes)
 import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+
+    provideDatabase(() => {
+      const database = getDatabase();
+      return database;
+    }),
+
+    provideAuth(() => {
+      const auth = getAuth();
+      return auth;
+    }),
+
+    FunctionsModule,
+    provideFunctions(() => {
+      const functions = getFunctions();
+      return functions;
+    }),
+
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
