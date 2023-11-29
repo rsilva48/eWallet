@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Transferencias </ion-title>
-    <ion-chip slot="end">
+    <ion-chip slot="end" color="primary">
       <ion-avatar>
         <img
           alt="Silhouette of a person's head"
@@ -20,7 +20,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-segment value="default">
+  <ion-segment value="default" color="primary" >
     <ion-segment-button value="default">
       <ion-label>Entre cuentas</ion-label>
     </ion-segment-button>
@@ -82,6 +82,7 @@
       (click)="transferir()"
       expand="block"
       [disabled]="!origen || !destino || !monto"
+      shape="round"
       >Transferir</ion-button
     >
   </ion-list>
