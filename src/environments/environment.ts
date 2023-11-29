@@ -7,7 +7,7 @@
 export const environment = {
   production: false,
   // Configuración de Firebase en ambiente de desarrollo
-  firebaseConfig: {
+  firebase: {
     apiKey: "AIzaSyBTXiQS-VwjjNg7bj3fRu7Ff0Rr9UN3UOY",
     authDomain: "rsewallet.firebaseapp.com",
     projectId: "rsewallet",
@@ -15,7 +15,12 @@ export const environment = {
     messagingSenderId: "329064991437",
     appId: "1:329064991437:web:79e43e9bc9037c9e41f784",
     measurementId: "G-VMDB3PRDB7"
-  }
+  },
+  // Información de usuario de prueba para consultas en firebase
+  owner: "rsilva",
+  ownerid: "123",
+  accpath: "accounts",
+  userspath: "users",
 };
 
 /*

@@ -10,8 +10,6 @@ import { AppComponent } from './app.component';
 //Importación de modulos de Angular Fire para el uso de Firebase
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { FunctionsModule, getFunctions, provideFunctions } from '@angular/fire/functions';
 
 
 //Importación de environment (constantes)
@@ -23,26 +21,14 @@ import { environment } from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-
+    //Inicialización de Firebase y asignación de base de datos a la constante database
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideDatabase(() => {
       const database = getDatabase();
       return database;
     }),
-
-    provideAuth(() => {
-      const auth = getAuth();
-      return auth;
-    }),
-
-    FunctionsModule,
-    provideFunctions(() => {
-      const functions = getFunctions();
-      return functions;
-    }),
-
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
