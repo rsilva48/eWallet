@@ -12,6 +12,7 @@
       "@modules/*": ["src/app/modules/*"],
       "@assets/*": ["src/assets/*"],
       "@theme/*": ["src/app/theme/*"],
+      "@services/*": ["src/app/services/*"],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

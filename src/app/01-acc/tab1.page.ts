@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Database, listVal, ref } from '@angular/fire/database';
-import { environment } from 'src/environments/environment';
+import { FBDBService } from '@services/firebase.service'; 
 
 @Component({
   selector: 'app-tab1',
@@ -10,15 +9,15 @@ import { environment } from 'src/environments/environment';
 })
 export class Tab1Page implements OnInit {
 
-  public cuentasfb$: Observable<any>;
+  public cuentas: Observable<any> | undefined;
 
-  //Se inyecta la base de datos de Firebase y se accede a la referencia de cuentas establecida en el archivo de entorno, para asignarlo a la variable cuentasfb$ como un arreglo
-  constructor(database: Database) {
-    const doc = ref(database, environment.accpath);
-    this.cuentasfb$ = listVal(doc);
+  //Se inyecta el servicio de Firebase y se asigna a database
+  constructor(private database: FBDBService) {
   }
   
   ngOnInit(): void {
+    //Se asigna a cuentas el observable de cuentas que se obtiene de la base de datos
+    this.cuentas = this.database.getCuentas(); // Obtiene cuentas de FBDBService
   }
 
 }
