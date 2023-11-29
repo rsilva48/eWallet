@@ -1,7 +1,8 @@
 {
   "name": "eWallet",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
