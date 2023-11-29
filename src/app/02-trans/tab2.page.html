@@ -40,7 +40,7 @@
         <ion-select-option
           [value]="cuenta.accnum"
           *ngFor="let cuenta of cuentas | async"
-          >{{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2' }}
+          >{{ cuenta.accnum }} - {{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2' }}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -55,7 +55,7 @@
         <ion-select-option
           [value]="cuenta.accnum"
           *ngFor="let cuenta of cuentas | async"
-          >{{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2' }}
+          >{{ cuenta.accnum }} - {{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2' }}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -64,7 +64,7 @@
       <ion-input
         [(ngModel)]="monto"
         type="number"
-        placeholder="$0.00"
+        placeholder="B/. 0.00"
       ></ion-input>
     </ion-item>
     <ion-item>
@@ -74,6 +74,6 @@
         placeholder="Ingrese descripcion (Opcional)"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="transferir()" expand="block">Transferir</ion-button>
+    <ion-button (click)="transferir()" expand="block" [disabled]="!origen || !destino || !monto">Transferir</ion-button>
   </ion-list>
 </ion-content>

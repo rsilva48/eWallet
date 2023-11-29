@@ -12,7 +12,7 @@
   </ion-header>
 
   <ion-list [inset]="true">
-  <ion-item lines="none">
+  <ion-item>
     <ion-avatar slot="start">
       <img
         alt="Silhouette of a person's head"
@@ -24,7 +24,7 @@
 </ion-list>
   
 
-  <ion-list lines="none">
+  <ion-list>
     <ion-list-header>
       <ion-label>
         <h1>Historial de transacciones</h1>
@@ -35,7 +35,7 @@
     <ion-item *ngFor="let transaccion of transacciones">
       <ion-card >
         <ion-card-header>
-          <ion-card-title>{{ transaccion.monto }}</ion-card-title>
+          <ion-card-title>B/. {{ transaccion.monto | number:'1.2-2' }}</ion-card-title>
           <ion-card-subtitle>{{ transaccion.name }}: {{ ( transaccion.monto < 0 ? transaccion.origen : transaccion.destino) | sinComa }} </ion-card-subtitle>
         </ion-card-header>
           <ion-card-content>
