@@ -40,7 +40,7 @@ export class Tab2Page implements OnInit {
   async transferir() {
     try {
       await this.db.transferir(this.origen, this.destino, this.monto, this.desc);
-      this.presentToast('Transferencia realizada con éxito.');
+      this.presentToast('Transferencia realizada con éxito.', 'success', 'checkmark-circle');
       this.cuentas = this.db.getCuentas(); // Actualiza cuentas
       this.origen = '';
       this.destino = '';
@@ -48,19 +48,20 @@ export class Tab2Page implements OnInit {
       this.monto = 0;
     } catch (error) {
       if (error instanceof Error) {
-        this.presentToast(error.message);
+        this.presentToast(error.message, 'danger', 'close-circle');
       } else {
-        this.presentToast('Error desconocido.');
+        this.presentToast('Error desconocido.', 'danger', 'close-circle');
       }
     }
   }
 
   //Se intento configurar la posición del toast en el archivo de entorno, pero no funciono
-  async presentToast(msg: string) {
+  async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
-      message: msg,
+      message: `<ion-icon name="${icon}"></ion-icon> ${msg}`,
       duration: 5000,
-      position: 'bottom'
+      position: 'bottom',
+      color: color,
     });
     toast.present();
   }

@@ -47,7 +47,7 @@
           <ion-card-subtitle>{{ transaccion.name }}: {{ ( transaccion.monto < 0 ? transaccion.origen : transaccion.destino) | sinComa }} </ion-card-subtitle>
         </ion-card-header>
           <ion-card-content>
-            {{ transaccion.fecha | date:'shortDate' }} - {{ transaccion.desc }}
+            {{ transaccion.fecha | date:'shortDate' }} {{ transaccion.desc ? '- ' + transaccion.desc : '' }}
           </ion-card-content>
         </ion-card>    
     </ion-item>
