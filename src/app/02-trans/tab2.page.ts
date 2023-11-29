@@ -29,6 +29,10 @@ export class Tab2Page implements OnInit {
     try {
       await this.db.transferir(this.origen, this.destino, this.monto);
       this.presentToast('Transferencia realizada con éxito.');
+      this.cuentas = this.db.getCuentas(); // Actualiza cuentas
+      this.origen = '';
+      this.destino = '';
+      this.monto = 0;
     } catch (error) {
       if (error instanceof Error) {
         this.presentToast(error.message);
