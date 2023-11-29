@@ -29,6 +29,7 @@ npm update
 npm aufit fix
 nvm install 16
 nvm use 16.20.2
+npm i -g npm@8.19.4
 ionic serve
 ```
 ## Configuración e instalación de Firebase v9 y AngularFire v7 compatible con Angular v12

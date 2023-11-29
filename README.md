@@ -24,7 +24,7 @@ Se esta utilizando el API Modular de Firebase
 
 ## Instalación
 
-### Instalar Node.js compatible con la version de Angular 12.2.17 en Windows
+### Instalar Node.js compatible con la version de Angular 12.2.17 en Windows y una versión de npm compatible
 
 Descargar de [este enlace](https://github.com/coreybutler/nvm-windows/releases/) descargar la ultima versión de Node Version Manager para Windows, buscar en el listado del ultimo release el archivo nvm-setup.exe y ejecutar desde CLI los comandos señalados al final de la sección.
 
@@ -32,11 +32,12 @@ Es posible instalar NVM sobre una instalación actual de Node.js.
 
 ```
 nvm install 16
-nvm use 16.20.2
+nvm use 16.20.2-
+npm i -g npm@8.19.4
 ```
 Oficialmente la ultima versión de Node.js compatible con Angular 12.2.17 es 14.15.0 [(Fuente)](https://angular.io/guide/versions), pero estamos instalando la versión 16.20.2 que es mas reciente y que es compatible con Webpack 5 utilizado por Angular 12. 
 
-### Instalar Node.js compatible con la version de Angular 12.2.17 en Linux
+### Instalar Node.js compatible con la version de Angular 12.2.17 en Linux y una versión de npm compatible
 
 Ejecutar las siguientes lineas para instalar NVM y la version de Node.JS 16.20.2
 
@@ -45,6 +46,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 bash
 nvm install 16
 nvm use 16.20.2
+npm i -g npm@8.19.4
 ```
 Oficialmente la ultima versión de Node.js compatible con Angular 12.2.17 es 14.15.0 [(Fuente)](https://angular.io/guide/versions), pero estamos instalando la versión 16.20.2 que es mas reciente y que es compatible con Webpack 5 utilizado por Angular 12. 
 
