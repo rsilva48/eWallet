@@ -32,6 +32,7 @@
     <ion-item>
       <ion-label position="stacked">Cuenta de origen</ion-label>
       <ion-select
+        interface="action-sheet"
         [(ngModel)]="origen"
         placeholder="Origen"
         okText="Aceptar"
@@ -40,13 +41,15 @@
         <ion-select-option
           [value]="cuenta.accnum"
           *ngFor="let cuenta of cuentas | async"
-          >{{ cuenta.accnum }} - {{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2' }}
+          >{{ cuenta.accnum | sinComa }} - {{ cuenta.name }} - Disp: ${{ cuenta.saldo |
+          number:'1.2-2' }}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Cuenta de destino</ion-label>
       <ion-select
+        interface="action-sheet"
         [(ngModel)]="destino"
         placeholder="Destino"
         okText="Aceptar"
@@ -55,7 +58,8 @@
         <ion-select-option
           [value]="cuenta.accnum"
           *ngFor="let cuenta of cuentas | async"
-          >{{ cuenta.accnum }} - {{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2' }}
+          >{{ cuenta.accnum | sinComa }} - {{ cuenta.name }} - Disp: ${{ cuenta.saldo |
+          number:'1.2-2' }}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -74,6 +78,11 @@
         placeholder="Ingrese descripcion (Opcional)"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="transferir()" expand="block" [disabled]="!origen || !destino || !monto">Transferir</ion-button>
+    <ion-button
+      (click)="transferir()"
+      expand="block"
+      [disabled]="!origen || !destino || !monto"
+      >Transferir</ion-button
+    >
   </ion-list>
 </ion-content>
