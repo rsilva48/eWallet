@@ -36,17 +36,45 @@ nvm use 16.20.2
 ```
 Oficialmente la ultima versión de Node.js compatible con Angular 12.2.17 es 14.15.0 [(Fuente)](https://angular.io/guide/versions), pero estamos instalando la versión 16.20.2 que es mas reciente y que es compatible con Webpack 5 utilizado por Angular 12. 
 
+### Instalar Node.js compatible con la version de Angular 12.2.17 en Linux
+
+Ejecutar las siguientes lineas para instalar NVM y la version de Node.JS 16.20.2
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+bash
+nvm install 16
+nvm use 16.20.2
+```
+Oficialmente la ultima versión de Node.js compatible con Angular 12.2.17 es 14.15.0 [(Fuente)](https://angular.io/guide/versions), pero estamos instalando la versión 16.20.2 que es mas reciente y que es compatible con Webpack 5 utilizado por Angular 12. 
+
 ### Instalar dependencias del proyecto
 ```
 npm install -g @ionic/cli
 npm install
 ```
-## Servir app
+
+## Ejecutar aplicación
+
+### Live Demo
+
+Puede acceder a [este enlace](https://rsilva.zef.ro/) para probar la aplicación directamente desde el navegador.
+
+
+### Servir app en modo desarrollo
 ```
 ionic serve
 ```
-Es posible que la primera vez salga una alerta del firewall de Windows para permitirle acceso a Node.js, hay que darle a permitir/allow.
+Es posible que la primera vez salga una alerta del firewall de Windows para permitirle acceso a Node.js, hay que darle a permitir/allow si desea acceder al app desde otro equipo en la misma red.
 
 Debe abrirse automaticamente en el navegador una página con la dirección http://localhost:8100 en donde se estara ejecutando el proyecto.
 
 Para cerrar el servidor apretar la combinación de teclas Control + C en la terminal donde se esta ejecutando.
+
+### Servir app en modo produccion Live Demo
+```
+ionic serve --prod --no-open
+```
+Se utilizara para servir la app en una maquina virtual con Ubuntu, para pasarlo por proxy a Apache en la misma maquina virtual, para poder exponerlo a Internet con certificados SSL, mediante un dominio y DNS dinamico.
+
+###
