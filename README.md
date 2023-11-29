@@ -3,6 +3,27 @@ Reto Frontend realizado por Roger Silva
 
 ## Dependencias
 
+### Requisitos de compatibilidad
+
+- Version 12 de Angular Core (@angular/core@12.2.17)
+
+- Version 5 de Ionic Framework Angular (@ionic/angular@5.9.4)
+
+- Version 6 de Ionic CLI (@ionic/cli@6.20.9)
+
+Los comandos utilizados para hacer downgrade a las versiones solicitadas estan en el archivo [Comandos](Comandos.md)
+
+### Firebase y AngularFire
+Se instalaron las ultimas versiones soportadas y compatibles con Angular v12
+
+- AngularFire v7 (@angular/fire@^7.6.1)
+
+- Firebase v9 (firebase@^9.23.0)
+
+Se esta utilizando el API Modular de Firebase
+
+## Instalación
+
 ### Instalar Node.js compatible con la version de Angular 12.2.17 en Windows
 
 Descargar de [este enlace](https://github.com/coreybutler/nvm-windows/releases/) descargar la ultima versión de Node Version Manager para Windows, buscar en el listado del ultimo release el archivo nvm-setup.exe y ejecutar desde CLI los comandos señalados al final de la sección.

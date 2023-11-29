@@ -23,6 +23,8 @@ export const environment = {
   accpath: "accounts/",
   userspath: "users/",
   transpath: "transacciones/",
+  // Configuración de Toasts
+  toastpos: 'bottom',
 };
 
 /*

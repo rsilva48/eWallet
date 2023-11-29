@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Database, listVal, ref, set, push, get, child } from '@angular/fire/database';
+import {
+  Database,
+  listVal,
+  ref,
+  set,
+  push,
+  get,
+  child,
+} from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FBDBService {
   public cuentas: Observable<any>;
   public usuarios: Observable<any>;
 
-   //Se inyecta la base de datos de Firebase y se accede a la referencias establecida en el archivo de entorno, para asignarlo a la variables como un arreglo
+  //Se inyecta la base de datos de Firebase y se accede a la referencias establecida en el archivo de entorno, para asignarlo a la variables como un arreglo
   constructor(private db: Database) {
     const AccRef = ref(this.db, environment.accpath);
     this.cuentas = listVal(AccRef);
@@ -34,10 +42,13 @@ export class FBDBService {
   }
   //Actualiza la cuenta especificada en el primer argumento de la función con el objeto cuenta
   async updateCuenta(id: string, cuenta: any) {
-    const res = await set(child(ref(this.db), environment.accpath + `${id}`), cuenta);
+    const res = await set(
+      child(ref(this.db), environment.accpath + `${id}`),
+      cuenta
+    );
   }
-//Añade una transferencia al listado de transacciones
-//Deberia añadirse a la cuenta de origen y destino
+  //Añade una transferencia al listado de transacciones
+  //Deberia añadirse a la cuenta de origen y destino
   async addTranferencia(transferencia: any) {
     await push(child(ref(this.db), environment.transpath), transferencia);
   }
@@ -64,7 +75,7 @@ export class FBDBService {
       origen,
       destino,
       monto,
-      fecha: new Date().toISOString()
+      fecha: new Date().toISOString(),
     };
     await this.addTranferencia(transferencia);
   }

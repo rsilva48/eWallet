@@ -6,7 +6,6 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { PipeSinComa } from '@app/sinComa.pipe';
 
-
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 @NgModule({
@@ -15,8 +14,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
   ],
-  declarations: [Tab1Page, PipeSinComa]
+  declarations: [Tab1Page, PipeSinComa],
 })
 export class Tab1PageModule {}
