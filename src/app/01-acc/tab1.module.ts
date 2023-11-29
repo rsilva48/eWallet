@@ -14,5 +14,6 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     Tab1PageRoutingModule,
   ],
   declarations: [Tab1Page, PipeSinComa],
+  exports: [PipeSinComa], // Exporta SinComaPipe
 })
 export class Tab1PageModule {}
