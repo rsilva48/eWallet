@@ -24,21 +24,21 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Cuenta de origen</ion-label>
-      <ion-select placeholder="Origen" okText="Aceptar" cancelText="Cancelar">
-        <ion-select-option [value]=cuenta.name *ngFor="let cuenta of cuentas | async">{{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2'  }} </ion-select-option>
+      <ion-select [(ngModel)]="origen" placeholder="Origen" okText="Aceptar" cancelText="Cancelar">
+        <ion-select-option [value]=cuenta.accnum *ngFor="let cuenta of cuentas | async">{{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2'  }} </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Cuenta de destino</ion-label>
-      <ion-select placeholder="Destino" okText="Aceptar" cancelText="Cancelar">
-        <ion-select-option [value]=cuenta.name *ngFor="let cuenta of cuentas | async">{{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2'  }} </ion-select-option>
+      <ion-select [(ngModel)]="destino" placeholder="Destino" okText="Aceptar" cancelText="Cancelar">
+        <ion-select-option [value]=cuenta.accnum *ngFor="let cuenta of cuentas | async">{{ cuenta.name }} - Disp: ${{ cuenta.saldo | number:'1.2-2'  }} </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item >
       <ion-label position="floating">Monto a transferir</ion-label>
-      <ion-input type="number" placeholder="$0.00"></ion-input>
+      <ion-input [(ngModel)]="monto" type="number" placeholder="$0.00"></ion-input>
     </ion-item>
-    <ion-button expand="block">Transferir</ion-button>
+    <ion-button (click)="transferir()" expand="block">Transferir</ion-button>
   </ion-list>
 
 </ion-content>

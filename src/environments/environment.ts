@@ -19,8 +19,10 @@ export const environment = {
   // Información de usuario de prueba para consultas en firebase
   owner: "rsilva",
   ownerid: "123",
-  accpath: "accounts",
-  userspath: "users",
+  // Rutas de la base de datos de Firebase
+  accpath: "accounts/",
+  userspath: "users/",
+  transpath: "transacciones/",
 };
 
 /*
