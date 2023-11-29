@@ -1,6 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Transferencias </ion-title>
+    <ion-chip slot="end">
+      <ion-avatar>
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar>
+      <ion-label>{{ username }}</ion-label>
+    </ion-chip>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +30,7 @@
   </ion-segment>
   <ion-list>
     <ion-item>
-      <ion-label position="floating">Cuenta de origen</ion-label>
+      <ion-label position="stacked">Cuenta de origen</ion-label>
       <ion-select
         [(ngModel)]="origen"
         placeholder="Origen"
@@ -36,7 +45,7 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Cuenta de destino</ion-label>
+      <ion-label position="stacked">Cuenta de destino</ion-label>
       <ion-select
         [(ngModel)]="destino"
         placeholder="Destino"
@@ -51,11 +60,18 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Monto a transferir</ion-label>
+      <ion-label position="stacked">Monto a transferir</ion-label>
       <ion-input
         [(ngModel)]="monto"
         type="number"
         placeholder="$0.00"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-input
+        [(ngModel)]="desc"
+        placeholder="Ingrese descripcion (Opcional)"
       ></ion-input>
     </ion-item>
     <ion-button (click)="transferir()" expand="block">Transferir</ion-button>

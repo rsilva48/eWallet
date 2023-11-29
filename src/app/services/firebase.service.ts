@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import {
   Database,
   listVal,
@@ -8,6 +8,7 @@ import {
   push,
   get,
   child,
+  list,
 } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 
@@ -15,30 +16,69 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class FBDBService {
-  public cuentas: Observable<any>;
-  public usuarios: Observable<any>;
-
-  //Se inyecta la base de datos de Firebase y se accede a la referencias establecida en el archivo de entorno, para asignarlo a la variables como un arreglo
-  constructor(private db: Database) {
-    const AccRef = ref(this.db, environment.accpath);
-    this.cuentas = listVal(AccRef);
-
-    const UsrRef = ref(this.db, environment.userspath);
-    this.usuarios = listVal(UsrRef);
-  }
+  constructor(private db: Database) {}
 
   //Consulta y retorna todas las cuentas
-  getCuentas(): Observable<any> {
-    return this.cuentas;
+  getCuentas() {
+    const AccRef = ref(this.db, environment.accpath);
+    return listVal(AccRef);
   }
+
   //Consulta y retorna todos los usuarios
-  getUsuarios(): Observable<any> {
-    return this.usuarios;
+  getUsuarios() {
+    const UsrsRef = ref(this.db, environment.userspath);
+    return listVal(UsrsRef);
   }
+
   //Consulta y retorna la cuenta especificada en el argumento de la función
   async getCuenta(id: string) {
     const res = await get(child(ref(this.db), environment.accpath + `${id}`));
     return res.val();
+  }
+
+  //Consulta y retorna el perfil del usuario especificado en el argumento de la función
+  async getProfile(id: string) {
+    const res = await get(child(ref(this.db), environment.userspath + `${id}`));
+    return res.val();
+  }
+
+  //Devuelve el nombre del usuario logueado
+  getUsername() {
+    return get(
+      child(ref(this.db), environment.userspath + `${environment.uid}/name`)
+    ).then((snapshot) => {
+      return snapshot.val();
+    });
+  }
+
+  //Devuelve el nombre del la cuenta del id proporcionado
+  getAccountname(aid: string) {
+    return get(child(ref(this.db), environment.userspath + `${aid}/name`)).then(
+      (snapshot) => {
+        return snapshot.val();
+      }
+    );
+  }
+
+  //Devuelve un arreglo con las transacciones del usuario logueado
+  getUserTrans(): Promise<any[]> {
+    return get(
+      child(
+        ref(this.db),
+        environment.userspath + `${environment.uid}/transacciones`
+      )
+    )
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return Object.values(snapshot.val());
+        } else {
+          return [];
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        return [];
+      });
   }
   //Actualiza la cuenta especificada en el primer argumento de la función con el objeto cuenta
   async updateCuenta(id: string, cuenta: any) {
@@ -48,11 +88,15 @@ export class FBDBService {
     );
   }
   //Añade una transferencia al listado de transacciones
-  //Deberia añadirse a la cuenta de origen y destino
   async addTranferencia(transferencia: any) {
     await push(child(ref(this.db), environment.transpath), transferencia);
   }
-  async transferir(origen: string, destino: string, monto: number) {
+  async transferir(
+    origen: string,
+    destino: string,
+    monto: number,
+    desc: string
+  ) {
     //Obtener las cuentas
     const cuentaOrigen = await this.getCuenta(origen);
     const cuentaDestino = await this.getCuenta(destino);
@@ -70,26 +114,32 @@ export class FBDBService {
     await this.updateCuenta(origen, cuentaOrigen);
     await this.updateCuenta(destino, cuentaDestino);
 
-    //Crea la transacción a regsitrar en Firebase
+    //Crea la transacción a registrar en Firebase
     const transferencia = {
+      name: cuentaOrigen.name,
       origen,
       destino,
       monto,
+      desc,
       fecha: new Date().toISOString(),
     };
 
     //Crea historial de transferencia para cada cuenta de origen y destino
     const transferenciaOrigen = {
+      name: cuentaOrigen.name,
       origen: origen,
       destino: destino,
       monto: -monto, // Monto negativo para la cuenta de origen
+      desc: desc,
       fecha: new Date().toISOString(),
     };
 
     const transferenciaDestino = {
-      destino: destino,
+      name: cuentaDestino.name,
       origen: origen,
+      destino: destino,
       monto: monto, // Monto positivo para la cuenta de destino
+      desc: desc,
       fecha: new Date().toISOString(),
     };
 
@@ -114,13 +164,19 @@ export class FBDBService {
 
     // Añadir la transferencia al historial de transacciones del usuario de origen
     await push(
-      child(ref(this.db), environment.userspath + `${cuentaOrigen.ownerid}/transacciones`),
+      child(
+        ref(this.db),
+        environment.userspath + `${cuentaOrigen.ownerid}/transacciones`
+      ),
       transferenciaOrigen
     );
 
     // Añadir la transferencia al historial de transacciones del usuario de destino
     await push(
-      child(ref(this.db), environment.userspath + `${cuentaOrigen.ownerid}/transacciones`),
+      child(
+        ref(this.db),
+        environment.userspath + `${cuentaOrigen.ownerid}/transacciones`
+      ),
       transferenciaDestino
     );
   }

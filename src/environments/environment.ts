@@ -17,8 +17,8 @@ export const environment = {
     measurementId: "G-VMDB3PRDB7"
   },
   // Información de usuario de prueba para consultas en firebase
-  owner: "rsilva",
-  ownerid: "123",
+  user: "rsilva",
+  uid: "123",
   // Rutas de la base de datos de Firebase
   accpath: "accounts/",
   userspath: "users/",
