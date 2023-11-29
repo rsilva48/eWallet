@@ -15,10 +15,17 @@ nvm use 16.20.2
 ```
 Oficialmente la ultima versión de Node.js compatible con Angular 12.2.17 es 14.15.0 [(Fuente)](https://angular.io/guide/versions), pero estamos instalando la versión 16.20.2 que es mas reciente y que es compatible con Webpack 5 utilizado por Angular 12. 
 
+### Instalar dependencias del proyecto
+```
+npm install -g @ionic/cli
+npm install
+```
 ## Servir app
 ```
 ionic serve
 ```
+Es posible que la primera vez salga una alerta del firewall de Windows para permitirle acceso a Node.js, hay que darle a permitir/allow.
+
 Debe abrirse automaticamente en el navegador una página con la dirección http://localhost:8100 en donde se estara ejecutando el proyecto.
 
 Para cerrar el servidor apretar la combinación de teclas Control + C en la terminal donde se esta ejecutando.
