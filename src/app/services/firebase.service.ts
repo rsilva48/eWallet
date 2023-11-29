@@ -31,7 +31,7 @@ export class FBDBService {
   getCuentas(): Observable<any> {
     return this.cuentas;
   }
-  //Consuulta y retorna todos los usuarios
+  //Consulta y retorna todos los usuarios
   getUsuarios(): Observable<any> {
     return this.usuarios;
   }
@@ -53,30 +53,75 @@ export class FBDBService {
     await push(child(ref(this.db), environment.transpath), transferencia);
   }
   async transferir(origen: string, destino: string, monto: number) {
-    // Obtener las cuentas
+    //Obtener las cuentas
     const cuentaOrigen = await this.getCuenta(origen);
     const cuentaDestino = await this.getCuenta(destino);
 
-    // Verificar que haya suficiente saldo
+    //Verificar que haya suficiente saldo
     if (cuentaOrigen.saldo < monto) {
       throw new Error('No hay suficiente saldo en la cuenta de origen.');
     }
 
-    // Realizar la transferencia
+    //Realizar la transferencia
     cuentaOrigen.saldo -= monto;
     cuentaDestino.saldo += monto;
 
-    // Actualizar las cuentas en Firebase
+    //Actualizar las cuentas en Firebase
     await this.updateCuenta(origen, cuentaOrigen);
     await this.updateCuenta(destino, cuentaDestino);
 
-    // Registrar la transacción en Firebase
+    //Crea la transacción a regsitrar en Firebase
     const transferencia = {
       origen,
       destino,
       monto,
       fecha: new Date().toISOString(),
     };
+
+    //Crea historial de transferencia para cada cuenta de origen y destino
+    const transferenciaOrigen = {
+      origen: origen,
+      destino: destino,
+      monto: -monto, // Monto negativo para la cuenta de origen
+      fecha: new Date().toISOString(),
+    };
+
+    const transferenciaDestino = {
+      destino: destino,
+      origen: origen,
+      monto: monto, // Monto positivo para la cuenta de destino
+      fecha: new Date().toISOString(),
+    };
+
+    //Añadir la transferencia al historial de la cuenta de origen
+    if (!cuentaOrigen.transferencias) {
+      cuentaOrigen.transferencias = [];
+    }
+    cuentaOrigen.transferencias.push(transferenciaOrigen);
+
+    //Añadir la transferencia al historial de la cuenta de destino
+    if (!cuentaDestino.transferencias) {
+      cuentaDestino.transferencias = [];
+    }
+    cuentaDestino.transferencias.push(transferenciaDestino);
+
+    //Registra la transferencia en Firebase
     await this.addTranferencia(transferencia);
+
+    //Registra la transferencia en las respectivas cuentas en firebase
+    await this.updateCuenta(origen, cuentaOrigen);
+    await this.updateCuenta(destino, cuentaDestino);
+
+    // Añadir la transferencia al historial de transacciones del usuario de origen
+    await push(
+      child(ref(this.db), environment.userspath + `${cuentaOrigen.ownerid}/transacciones`),
+      transferenciaOrigen
+    );
+
+    // Añadir la transferencia al historial de transacciones del usuario de destino
+    await push(
+      child(ref(this.db), environment.userspath + `${cuentaOrigen.ownerid}/transacciones`),
+      transferenciaDestino
+    );
   }
 }

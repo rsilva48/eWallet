@@ -23,7 +23,7 @@ export const environment = {
   accpath: "accounts/",
   userspath: "users/",
   transpath: "transacciones/",
-  // Configuración de Toasts
+  // Configuración de Toasts, no permitio importarlo en el modulo de transferencias
   toastpos: 'bottom',
 };
 
