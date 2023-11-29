@@ -1,5 +1,5 @@
 {
-  "name": "eWallet",
+  "name": "RSeWallet",
   "integrations": {
     "capacitor": {},
     "cordova": {}
