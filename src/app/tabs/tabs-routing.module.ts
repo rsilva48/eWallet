@@ -9,15 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: 'cuentas',
-        loadChildren: () => import('../01-acc/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('../01-acc/acc.module').then(m => m.Tab1PageModule)
       },
       {
         path: 'transferencias',
-        loadChildren: () => import('../02-trans/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('../02-trans/trans.module').then(m => m.Tab2PageModule)
       },
       {
         path: 'perfil',
-        loadChildren: () => import('../03-perfil/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () => import('../03-perfil/perf.module').then(m => m.Tab3PageModule)
       },
       {
         path: '',

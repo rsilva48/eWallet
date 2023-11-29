@@ -5,8 +5,8 @@ import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
+  templateUrl: 'perf.page.html',
+  styleUrls: ['perf.page.scss'],
 })
 export class Tab3Page implements OnInit {
   public usuario: Observable<any> | undefined;
